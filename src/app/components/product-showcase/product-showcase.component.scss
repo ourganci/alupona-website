@@ -1,0 +1,393 @@
+@use '../../../styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+.showcase {
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: $white;
+
+  &.reverse {
+    background: $gray-100;
+  }
+}
+
+// Hintergrund-Bild mit Blur (verschwommener Hintergrund)
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(40px);
+  opacity: 0.15;
+  transform: scale(1.1);
+  z-index: $z-base;
+}
+
+.container {
+  max-width: 1600px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-2xl;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+  position: relative;
+  z-index: $z-base + 1;
+}
+
+// Bild-Seite
+.image-side {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+
+  &.image-left {
+    justify-content: flex-start;
+  }
+
+  &.image-right {
+    justify-content: flex-end;
+  }
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: $radius-lg;
+  
+  // Weiche Kanten mit Mask-Image (Fade zu Transparent)
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+
+  // Schatten für mehr Tiefe
+  filter: drop-shadow(0 20px 60px rgba($black, 0.3));
+}
+
+// Content-Seite mit Slide-in Animation
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  opacity: 0;
+  transform: translateX(0);
+  transition: all $transition-slower cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.content-left {
+    transform: translateX(-100px);
+  }
+
+  &.content-right {
+    transform: translateX(100px);
+  }
+
+  .showcase.visible & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.title {
+  font-size: clamp($font-size-3xl, 4vw, $font-size-5xl);
+  color: $black-soft;
+  margin: 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -2px;
+  position: relative;
+  padding-bottom: $spacing-md;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-orange, transparent);
+  }
+
+  .showcase.visible & {
+    animation: slideInTitle 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+  }
+}
+
+.description {
+  font-size: $font-size-xl;
+  color: $gray-600;
+  line-height: $line-height-relaxed;
+  margin: 0;
+
+  .showcase.visible & {
+    animation: slideInText 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+  }
+}
+
+.benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  li {
+    font-size: $font-size-lg;
+    color: $black-soft;
+    padding-left: 2.5rem;
+    position: relative;
+    font-weight: $font-weight-medium;
+    opacity: 0;
+
+    &::before {
+      content: '→';
+      color: $primary-orange;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-xl;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    .showcase.visible & {
+      animation: slideInBenefit 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{0.6 + ($i * 0.1)}s;
+        }
+      }
+    }
+  }
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $primary-orange;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-lg;
+  padding: $spacing-md $spacing-xl;
+  border: 2px solid $primary-orange;
+  border-radius: $radius-full;
+  transition: all $transition-base;
+  align-self: flex-start;
+  opacity: 0;
+
+  .arrow {
+    font-size: $font-size-xl;
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    background: $primary-orange;
+    color: $white;
+    transform: translateY(-3px);
+    box-shadow: $shadow-orange;
+
+    .arrow {
+      transform: translateX(8px);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  .showcase.visible & {
+    animation: slideInButton 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
+  }
+}
+
+// Animationen
+@keyframes slideInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInBenefit {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInButton {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// RESPONSIVE BREAKPOINTS
+// ============================================
+
+@media (max-width: $breakpoint-xl) {
+  .container {
+    padding: 0 $spacing-3xl;
+    gap: $spacing-2xl;
+  }
+
+  .image-side {
+    height: 70vh;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .showcase {
+    min-height: 100vh;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: $spacing-3xl;
+    padding: $spacing-lg;
+  }
+
+  .image-side {
+    height: 50vh;
+    justify-content: center !important;
+    order: 1;
+  }
+
+  .content {
+    order: 2;
+    text-align: center;
+    align-items: center;
+
+    &.content-left,
+    &.content-right {
+      transform: translateY(50px);
+    }
+
+    .showcase.visible & {
+      transform: translateY(0);
+    }
+  }
+
+  .title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .benefits li {
+    text-align: left;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .showcase {
+    min-height: 100vh;
+  }
+
+  .container {
+    padding: $spacing-md;
+  }
+
+  .image-side {
+    height: 40vh;
+  }
+
+  .image {
+    border-radius: $radius-md;
+  }
+
+  .title {
+    font-size: $font-size-3xl;
+  }
+
+  .description {
+    font-size: $font-size-lg;
+  }
+
+  .cta-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .image-side {
+    height: 35vh;
+  }
+
+  .benefits {
+    gap: $spacing-sm;
+
+    li {
+      font-size: $font-size-base;
+    }
+  }
+
+  .title {
+    font-size: $font-size-2xl;
+  }
+
+  .description {
+    font-size: $font-size-base;
+  }
+}

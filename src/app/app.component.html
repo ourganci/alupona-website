@@ -1,3 +1,22 @@
-<app-header />
+<app-loading-screen (loadingComplete)="onLoadingComplete()" />
 
-<app-hero />
+<!-- Hauptseite ist IMMER da, nur unsichtbar am Anfang -->
+<div class="page-container" [class.visible]="showMainContent()">
+  <app-header />
+  <app-hero />
+
+  <main class="main" id="inspiration">
+    <app-product-showcase />
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 alupona<sup>&reg;</sup> – Licht in Form gebracht.</p>
+      <nav class="footer-nav">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+</div>

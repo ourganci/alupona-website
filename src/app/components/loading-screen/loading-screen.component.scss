@@ -1,0 +1,209 @@
+:host {
+  display: block;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0a0a;
+  z-index: 9999; // ← Über Hauptseite
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 2s ease-out; // ← Gleiche Dauer wie Main (2s)
+
+  &.fade-out {
+    opacity: 0;
+    pointer-events: none; // ← Klicks gehen durch
+  }
+}
+
+// Border Container
+.border-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+// Einzelne Border-Seiten
+.border-top,
+.border-right,
+.border-bottom,
+.border-left {
+  position: absolute;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #ffd700 50%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+  transform-origin: left center;
+  opacity: 0;
+}
+
+.border-top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+.border-right {
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.border-bottom {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+}
+
+.border-left {
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+// Animation wenn .animate Klasse gesetzt
+.border-container.animate {
+  .border-top {
+    animation: borderTopRun 0.6s ease-out forwards;
+  }
+  
+  .border-right {
+    animation: borderRightRun 0.6s ease-out 0.6s forwards;
+  }
+  
+  .border-bottom {
+    animation: borderBottomRun 0.6s ease-out 1.2s forwards;
+  }
+  
+  .border-left {
+    animation: borderLeftRun 0.6s ease-out 1.8s forwards;
+  }
+}
+
+// Keyframe Animationen für jeden Border
+@keyframes borderTopRun {
+  0% {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes borderRightRun {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes borderBottomRun {
+  0% {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes borderLeftRun {
+  0% {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+// Logo in der Mitte
+.logo-container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  opacity: 0;
+  animation: logoFadeIn 0.8s ease-out 0.5s forwards;
+}
+
+.logo {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  color: #ffd700;
+  margin: 0 0 1rem 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+
+  sup {
+    font-size: 0.4em;
+  }
+}
+
+.tagline {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: #ccc;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .border-top,
+  .border-bottom {
+    height: 2px;
+  }
+
+  .border-left,
+  .border-right {
+    width: 2px;
+  }
+
+  .logo {
+    font-size: 3rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+}

@@ -1,1 +1,42 @@
-<p>product-showcase works!</p>
+@for (showcase of showcases(); track showcase.title; let i = $index) {
+  <section 
+    #showcaseSection
+    class="showcase" 
+    [class.reverse]="showcase.position === 'right'"
+    [class.visible]="isVisible(i)">
+    
+    <div class="background-image" [style.background-image]="'url(' + showcase.image + ')'"></div>
+    
+    <div class="container">
+      <div 
+        class="image-side" 
+        [class.image-left]="showcase.position === 'left'"
+        [class.image-right]="showcase.position === 'right'">
+        <div class="image-wrapper">
+          <img [src]="showcase.image" [alt]="showcase.title" class="image" loading="lazy">
+        </div>
+      </div>
+
+      <article 
+        class="content" 
+        [class.content-left]="showcase.position === 'right'"
+        [class.content-right]="showcase.position === 'left'">
+        <h2 class="title">{{ showcase.title }}</h2>
+        <p class="description">{{ showcase.text }}</p>
+        
+        @if (showcase.benefits.length > 0) {
+          <ul class="benefits">
+            @for (benefit of showcase.benefits; track benefit) {
+              <li>{{ benefit }}</li>
+            }
+          </ul>
+        }
+        
+        <a [href]="showcase.link" class="cta-link">
+          Mehr erfahren
+          <span class="arrow">→</span>
+        </a>
+      </article>
+    </div>
+  </section>
+}

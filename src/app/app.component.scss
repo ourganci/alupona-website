@@ -2,9 +2,23 @@
   display: block;
 }
 
+.page-container {
+  opacity: 0; // ← Startet UNSICHTBAR
+  transition: opacity 2s ease-in; // ← Gleichzeitig mit Loading-Fade
+
+  &.visible {
+    opacity: 1; // ← Wird sichtbar
+  }
+
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-padding-top: 0;
+  overscroll-behavior-y: contain;
+}
+
 .main {
-  min-height: 100vh;
-  background: #f8f9fa;
+  // Kein spezielles Styling
 }
 
 .footer {
@@ -12,6 +26,8 @@
   color: white;
   padding: 3rem 2rem;
   border-top: 2px solid #ffd700;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .footer-content {

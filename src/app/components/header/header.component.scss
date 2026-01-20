@@ -1,3 +1,5 @@
+@use '../../../styles.scss' as *;
+
 :host {
   display: block;
 }
@@ -7,11 +9,11 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 26, 26, 0.95);
+  background: rgba(var(--black-soft), 0.95);
   backdrop-filter: blur(10px);
-  z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  z-index: $z-fixed;
+  transition: all $transition-base;
+  box-shadow: $shadow-md;
 }
 
 .container {
@@ -24,13 +26,13 @@
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #ffd700;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $primary-orange;
   text-decoration: none;
-  transition: transform 0.3s;
+  transition: transform $transition-base;
   letter-spacing: 0.5px;
-  z-index: 1001;
+  z-index: $z-fixed + 1;
 
   &:hover {
     transform: scale(1.05);
@@ -41,17 +43,21 @@
   }
 }
 
+.logo-o {
+  color: $primary-orange;
+}
+
 .nav {
   display: flex;
   gap: 2.5rem;
   align-items: center;
 
   a {
-    color: white;
+    color: $secondary-gray-dark; // ← Weiß für normale Links (nicht grau!)
     text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
+    transition: color $transition-base;
     position: relative;
 
     &::after {
@@ -61,12 +67,12 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #ffd700;
-      transition: width 0.3s;
+      background: $primary-orange;
+      transition: width $transition-base;
     }
 
     &:hover {
-      color: #ffd700;
+      // color: $primary-orange; // ← Aktiviere das wieder!
 
       &::after {
         width: 100%;
@@ -74,33 +80,43 @@
     }
 
     &.cta {
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
-      color: #1a1a1a;
+      // Option 1: Glassmorphism mit Border (empfohlen!)
+      // background: rgba($primary-orange, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid $primary-orange;
+      color: $primary-orange;
       padding: 0.8rem 1.8rem;
-      border-radius: 50px;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      border-radius: $radius-full;
+      font-weight: $font-weight-semibold;
+      // box-shadow: 0 4px 15px rgba($primary-orange, 0.2);
 
       &::after {
         display: none;
       }
 
       &:hover {
+        background: $primary-orange; // Voll orange beim Hover
+        color: $white;
         transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
-        color: #1a1a1a;
+        box-shadow: $shadow-orange-lg;
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
   }
 }
+
 
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.5rem;
-  z-index: 1001;
+  padding: $spacing-xs;
+  z-index: $z-fixed + 1;
   position: relative;
 }
 
@@ -108,9 +124,9 @@
   display: block;
   width: 28px;
   height: 2px;
-  background: #ffd700;
+  background: $primary-orange;
   position: relative;
-  transition: background 0.3s;
+  transition: background $transition-base;
 
   &::before,
   &::after {
@@ -118,8 +134,8 @@
     position: absolute;
     width: 28px;
     height: 2px;
-    background: #ffd700;
-    transition: transform 0.3s;
+    background: $primary-orange;
+    transition: transform $transition-base;
   }
 
   &::before {
@@ -143,13 +159,13 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $breakpoint-lg) {
   .nav {
     gap: 1.5rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-md) {
   .container {
     padding: 1rem 1.5rem;
   }
@@ -160,23 +176,23 @@
     right: -100%;
     height: 100vh;
     width: 280px;
-    background: #1a1a1a;
+    background: $black-soft;
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
     padding: 2rem;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    transition: right $transition-base;
+    box-shadow: -5px 0 20px rgba($black, 0.3);
 
     &.mobile-open {
       right: 0;
     }
 
     a {
-      font-size: 1.2rem;
+      font-size: $font-size-lg;
 
       &::after {
-        display: none; // Remove underline animation on mobile
+        display: none;
       }
 
       &.cta {
@@ -190,16 +206,16 @@
   }
 
   .logo {
-    font-size: 1.5rem;
+    font-size: $font-size-xl;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $breakpoint-xs) {
   .nav {
     width: 250px;
   }
 
   .logo {
-    font-size: 1.4rem;
+    font-size: $font-size-lg;
   }
 }

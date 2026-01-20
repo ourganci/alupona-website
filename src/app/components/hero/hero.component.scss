@@ -1,3 +1,5 @@
+@use '../../../styles.scss' as *;
+
 :host {
   display: block;
 }
@@ -8,11 +10,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2a2a2a 100%);
+  background: $gradient-dark;
   position: relative;
   overflow: hidden;
   padding: 0 4rem;
   gap: 4rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  // Zusätzlicher Mesh-Gradient Effekt
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba($primary-orange, 0.08) 0%, transparent 70%);
+    border-radius: $radius-circle;
+    z-index: $z-base;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba($primary-orange-light, 0.06) 0%, transparent 70%);
+    border-radius: $radius-circle;
+    z-index: $z-base;
+  }
 }
 
 .hero-overlay {
@@ -21,67 +50,67 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/assets/images/hero-bg.jpg');  
-  opacity: 0.12;
-  z-index: 1;
+  background: url('/assets/images/hero-bg.jpg') center/cover no-repeat;
+  opacity: 0.15;
+  z-index: $z-base;
 }
 
 .hero-content {
   flex: 1;
   max-width: 700px;
   position: relative;
-  z-index: 2;
+  z-index: $z-base + 1;
   animation: fadeInUp 1s ease-out;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 6vw, 6.5rem);
-  color: white;
-  margin: 0 0 1.5rem 0;
-  line-height: 1.1;
-  font-weight: 800;
+  font-size: clamp($font-size-5xl, 6vw, $font-size-6xl);
+  color: $white;
+  margin: 0 0 $spacing-md 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
   letter-spacing: -2px;
   
-  background: linear-gradient(135deg, #ffffff 0%, #ffd700 100%);
+  background: linear-gradient(135deg, $white 0%, $primary-orange 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  color: #ccc;
-  margin: 0 0 3rem 0;
-  line-height: 1.7;
-  font-weight: 300;
+  font-size: clamp($font-size-lg, 2vw, $font-size-xl);
+  color: $gray-300;
+  margin: 0 0 $spacing-3xl 0;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-light;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: $spacing-md;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 1.2rem 2.5rem;
-  border-radius: 50px;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-full;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.05rem;
-  transition: all 0.3s ease;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-lg;
+  transition: all $transition-base;
   display: inline-block;
   cursor: pointer;
   border: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #1a1a1a;
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+  background: $gradient-primary;
+  color: $white;
+  box-shadow: $shadow-orange;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
+    box-shadow: $shadow-orange-lg;
   }
 
   &:active {
@@ -90,14 +119,15 @@
 }
 
 .btn-secondary {
-  border: 2px solid #ffd700;
-  color: #ffd700;
-  background: rgba(255, 215, 0, 0.05);
+  border: 2px solid $primary-orange;
+  color: $primary-orange;
+  background: rgba($primary-orange, 0.05);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   &:hover {
-    background: #ffd700;
-    color: #1a1a1a;
+    background: $primary-orange;
+    color: $white;
     transform: translateY(-3px);
   }
 
@@ -109,7 +139,7 @@
 .hero-visual {
   flex: 1;
   position: relative;
-  z-index: 2;
+  z-index: $z-base + 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,8 +149,13 @@
 .glow-circle {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 40%, transparent 70%);
-  border-radius: 50%;
+  background: radial-gradient(
+    circle, 
+    rgba($primary-orange, 0.3) 0%, 
+    rgba($primary-orange, 0.1) 40%, 
+    transparent 70%
+  );
+  border-radius: $radius-circle;
   animation: pulse 4s ease-in-out infinite;
   position: relative;
 
@@ -132,8 +167,12 @@
     transform: translate(-50%, -50%);
     width: 80%;
     height: 80%;
-    background: radial-gradient(circle, rgba(255, 237, 78, 0.2) 0%, transparent 70%);
-    border-radius: 50%;
+    background: radial-gradient(
+      circle, 
+      rgba($primary-orange-light, 0.2) 0%, 
+      transparent 70%
+    );
+    border-radius: $radius-circle;
     animation: pulse 4s ease-in-out infinite reverse;
   }
 }
@@ -142,8 +181,12 @@
   position: absolute;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
-  border-radius: 50%;
+  background: radial-gradient(
+    circle, 
+    rgba($primary-orange, 0.4) 0%, 
+    transparent 70%
+  );
+  border-radius: $radius-circle;
   top: 20%;
   right: 10%;
   animation: float 6s ease-in-out infinite;
@@ -186,10 +229,14 @@
   }
 }
 
-@media (max-width: 1200px) {
+// ============================================
+// RESPONSIVE BREAKPOINTS
+// ============================================
+
+@media (max-width: $breakpoint-xl) {
   .hero {
-    padding: 0 3rem;
-    gap: 3rem;
+    padding: 0 $spacing-3xl;
+    gap: $spacing-3xl;
   }
 
   .glow-circle {
@@ -202,13 +249,13 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $breakpoint-lg) {
   .hero {
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    padding: 120px 2rem 2rem;
-    gap: 3rem;
+    padding: 120px $spacing-lg $spacing-lg;
+    gap: $spacing-3xl;
   }
 
   .hero-content {
@@ -217,7 +264,7 @@
 
   .hero-visual {
     height: 350px;
-    margin-top: 2rem;
+    margin-top: $spacing-lg;
   }
 
   .glow-circle {
@@ -235,10 +282,10 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-md) {
   .hero {
     min-height: 600px;
-    padding: 100px 1.5rem 2rem;
+    padding: 100px $spacing-md $spacing-lg;
   }
 
   .hero-visual {
@@ -256,22 +303,22 @@
   }
 
   .btn {
-    padding: 1rem 2rem;
-    font-size: 0.95rem;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $breakpoint-xs) {
   .hero {
     min-height: 550px;
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: $font-size-4xl;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: $font-size-base;
   }
 
   .hero-visual {
@@ -284,7 +331,7 @@
   }
 
   .glow-circle-small {
-    display: none; // Hide on very small screens
+    display: none;
   }
 
   .hero-buttons {
