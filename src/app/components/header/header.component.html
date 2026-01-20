@@ -1,0 +1,23 @@
+<header class="header">
+  <div class="container">
+    <a href="/" class="logo" (click)="closeMobileMenu()">
+      alupona<sup>&reg;</sup>
+    </a>
+
+    <nav class="nav" [class.mobile-open]="isMobileMenuOpen()">
+      <a href="/inspiration" (click)="closeMobileMenu()">Inspiration</a>
+      <a href="/produkte" (click)="closeMobileMenu()">Produkte</a>
+      <a href="/profi" (click)="closeMobileMenu()">Für Profis</a>
+      <a href="/kontakt" (click)="closeMobileMenu()">Kontakt</a>
+      <a href="/webshop" class="cta" (click)="closeMobileMenu()">Zum Shop</a>
+    </nav>
+
+    <button 
+      class="menu-toggle" 
+      (click)="toggleMobileMenu()"
+      [attr.aria-label]="isMobileMenuOpen() ? 'Menü schließen' : 'Menü öffnen'"
+      [attr.aria-expanded]="isMobileMenuOpen()">
+      <span class="menu-icon" [class.open]="isMobileMenuOpen()"></span>
+    </button>
+  </div>
+</header>
