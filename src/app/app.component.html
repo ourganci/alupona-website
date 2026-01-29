@@ -1,21 +1,72 @@
 <app-loading-screen (loadingComplete)="onLoadingComplete()" />
 
-<!-- Hauptseite ist IMMER da, nur unsichtbar am Anfang -->
 <div class="page-container" [class.visible]="showMainContent()">
   <app-header />
   <app-hero />
 
   <main class="main" id="inspiration">
     <app-product-showcase />
+    <app-features-section />
   </main>
 
   <footer class="footer">
     <div class="footer-content">
-      <p>&copy; 2026 alupona<sup>&reg;</sup> – Licht in Form gebracht.</p>
-      <nav class="footer-nav">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <h3 class="brand-logo">
+          alup<span class="logo-o">o</span>na<sup>®</sup>
+        </h3>
+        <p class="brand-tagline">Licht in Form gebracht</p>
+        <p class="brand-description">
+          Hochwertige LED-Aluprofile für architektonisches Lichtdesign. 
+          Made in Germany mit Leidenschaft für perfekte Beleuchtung.
+        </p>
+        <div class="social-links">
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">📷</a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">💼</a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">📘</a>
+          <a href="mailto:info@alupona.de" aria-label="E-Mail">✉️</a>
+        </div>
+      </div>
+
+      <!-- Produkte -->
+      <div class="footer-section">
+        <h4>Produkte</h4>
+        <a href="/produkte/aufbauprofile">Aufbauprofile</a>
+        <a href="/produkte/einbauprofile">Einbauprofile</a>
+        <a href="/produkte/eckprofile">Eckprofile</a>
+        <a href="/produkte/fliesenprofile">Fliesenprofile</a>
+        <a href="/produkte/zubehoer">Zubehör</a>
+      </div>
+
+      <!-- Service -->
+      <div class="footer-section">
+        <h4>Service</h4>
+        <a href="/inspiration">Inspiration</a>
+        <a href="/profi">Für Profis</a>
+        <a href="/downloads">Downloads</a>
+        <a href="/faq">FAQ</a>
+        <a href="/kontakt">Kontakt</a>
+      </div>
+
+      <!-- Unternehmen -->
+      <div class="footer-section">
+        <h4>Unternehmen</h4>
+        <a href="/ueber-uns">Über uns</a>
+        <a href="/nachhaltigkeit">Nachhaltigkeit</a>
+        <a href="/karriere">Karriere</a>
+        <a href="/presse">Presse</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 alupona<sup>®</sup> – Alle Rechte vorbehalten.</p>
+      <nav class="footer-legal">
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
-        <a href="/kontakt">Kontakt</a>
+        <a href="/agb">AGB</a>
       </nav>
     </div>
   </footer>

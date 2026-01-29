@@ -1,0 +1,29 @@
+<section class="features-section" [class.visible]="isVisible()">
+  <div class="container">
+    <!-- Rest bleibt gleich -->
+    <div class="section-header">
+      <span class="eyebrow">Qualität seit Jahrzehnten</span>
+      <h2 class="section-title">Warum alupona?</h2>
+      <p class="section-subtitle">
+        Wenn Licht auf Präzision trifft. Unsere LED-Aluprofile vereinen
+        deutsches Engineering mit zeitlosem Design.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      @for (feature of features; track feature.title; let i = $index) {
+        <article class="feature-card" [style.animation-delay.s]="0.1 + (i * 0.08)">
+          <div class="card-glow"></div>
+          
+          <div class="card-content">
+            <span class="feature-highlight">{{ feature.highlight }}</span>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-description">{{ feature.description }}</p>
+          </div>
+
+          <div class="card-number">{{ (i + 1).toString().padStart(2, '0') }}</div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

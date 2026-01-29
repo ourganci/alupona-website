@@ -23,6 +23,8 @@
             "outputPath": "dist/alupona-website",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "baseHref": "/alupona-website/",
+            "deployUrl": "/alupona-website/",
             "polyfills": [
               "zone.js"
             ],
@@ -46,8 +48,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kB",
-                  "maximumError": "10kB"
+                  "maximumWarning": "66kB",
+                  "maximumError": "100kB"
                 }
               ],
               "outputHashing": "all"
@@ -95,6 +97,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

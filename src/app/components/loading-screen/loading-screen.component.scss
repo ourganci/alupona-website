@@ -1,3 +1,5 @@
+@use '../../../styles.scss' as *;
+
 :host {
   display: block;
 }
@@ -40,10 +42,10 @@
   position: absolute;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    #ffd700 50%, 
+    $primary-orange 50%, 
     transparent 100%
   );
-  box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+  box-shadow: 0 0 20px $primary-orange, 0 0 40px $primary-orange;
   transform-origin: left center;
   opacity: 0;
 }

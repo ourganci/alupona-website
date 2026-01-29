@@ -135,6 +135,7 @@ $z-loading: 9999;
 html {
   scroll-behavior: smooth;
   font-size: 16px; // Base für rem-Berechnungen
+  scroll-snap-type: y mandatory;
 }
 
 body {

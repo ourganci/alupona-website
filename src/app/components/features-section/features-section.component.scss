@@ -1,0 +1,248 @@
+@use '../../../styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+// ============================================
+// SECTION (1. SNAP POINT)
+// ============================================
+.features-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column; // Wichtig für vertikale Anordnung
+  align-items: center;
+  overflow: visible; // Snap braucht Sichtbarkeit im Scroll-Kontext
+  
+  // Erster Snap-Punkt: Wenn die Section beginnt (Header sichtbar)
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  background: linear-gradient(180deg, $gray-900 0%, $black-soft 100%);
+  padding: ($spacing-3xl * 2) 0;
+}
+
+// ============================================
+// CONTAINER
+// ============================================
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-2xl;
+  position: relative;
+  z-index: $z-base + 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================
+// SECTION HEADER
+// ============================================
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-3xl * 1.5;
+  opacity: 0;
+  transform: translateY(30px);
+  
+  .features-section.visible & {
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: $primary-orange;
+  margin-bottom: $spacing-md;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, $primary-orange);
+  }
+
+  &::before { right: calc(100% + 16px); }
+  &::after {
+    left: calc(100% + 16px);
+    background: linear-gradient(to left, transparent, $primary-orange);
+  }
+}
+
+.section-title {
+  font-size: clamp($font-size-4xl, 5vw, $font-size-6xl);
+  color: $white;
+  margin: 0 0 $spacing-lg 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -2px;
+}
+
+.section-subtitle {
+  font-size: clamp($font-size-lg, 2vw, $font-size-xl);
+  color: $gray-300;
+  line-height: $line-height-relaxed;
+  margin: 0 auto;
+  max-width: 700px;
+  font-weight: $font-weight-light;
+}
+
+// ============================================
+// FEATURES GRID (2. SNAP POINT)
+// ============================================
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+
+  // Zweiter Snap-Punkt: Das Grid rückt in den Fokus
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  // Verhindert, dass das Grid am oberen Rand klebt (Platz für Sticky Header)
+  scroll-margin-top: 200px; 
+}
+
+// ============================================
+// FEATURE CARD
+// ============================================
+.feature-card {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  height: 100%; // Karten gleich hoch machen
+  
+  .features-section.visible & {
+    animation: cardFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+}
+
+.card-content {
+  height: 100%;
+  padding: $spacing-2xl;
+  background: rgba($white, 0.04);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba($white, 0.1);
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 20px rgba($black, 0.3), inset 0 1px 0 rgba($white, 0.06);
+  transition: all $transition-slow;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, $primary-orange, transparent);
+    opacity: 0;
+    transition: all $transition-base;
+  }
+
+  .feature-card:hover & {
+    transform: translateY(-4px);
+    border-color: rgba($primary-orange, 0.25);
+    background: rgba($white, 0.06);
+    box-shadow: 0 10px 36px rgba($primary-orange, 0.12), inset 0 1px 0 rgba($white, 0.1);
+
+    &::before {
+      opacity: 1;
+      width: 100px;
+    }
+  }
+}
+
+.card-number {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-extrabold;
+  color: rgba($white, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  transition: all $transition-base;
+  z-index: 1;
+
+  .feature-card:hover & {
+    color: rgba($primary-orange, 0.12);
+    transform: scale(1.05);
+  }
+}
+
+.feature-highlight {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $primary-orange;
+  margin-bottom: $spacing-sm;
+  padding: 4px 12px;
+  background: rgba($primary-orange, 0.12);
+  border-radius: $radius-full;
+}
+
+.feature-title {
+  font-size: $font-size-xl;
+  color: $white;
+  margin: 0 0 $spacing-md 0;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.5px;
+}
+
+.feature-description {
+  font-size: $font-size-base;
+  color: $gray-400;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  font-weight: $font-weight-light;
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: $breakpoint-lg) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    // Bei Mobile entfernen wir oft das Snapping für das Grid, 
+    // da es sonst zu "hüpfig" wird
+    scroll-snap-align: none; 
+  }
+  
+  .features-section {
+    min-height: auto;
+  }
+}
