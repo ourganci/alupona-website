@@ -159,13 +159,13 @@
   }
 }
 
-@media (max-width: $breakpoint-lg) {
-  .nav {
-    gap: 1.5rem;
-  }
-}
+// @media (max-width: 1025px) {
+//   .nav {
+//     gap: 1.5rem;
+//   }
+// }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: $breakpoint-lg) {
   .container {
     padding: 1rem 1.5rem;
   }

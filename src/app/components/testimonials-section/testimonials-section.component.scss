@@ -1,0 +1,277 @@
+@use '../../../styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+.testimonials-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: $spacing-3xl 0;
+  
+  // DEZENTER PINK-BLAU GRADIENT
+  background: linear-gradient(
+    135deg,
+    #1e1e2e 0%,          // Sehr dunkles Grau-Blau
+    #2a2d3a 25%,         // Dunkelgrau mit Blau-Touch
+    #2d3561 50%,         // Gedämpftes Blau
+    #3d2d52 75%,         // Gedämpftes Lila
+    #4a3f5c 100%         // Grau-Lila
+  );
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 15% 25%, rgba(100, 100, 255, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255, 100, 200, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// ============================================
+// CONTAINER
+// ============================================
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 $spacing-2xl;
+  position: relative;
+  z-index: 1;
+}
+
+// ============================================
+// SECTION HEADER (Kompakter)
+// ============================================
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $primary-orange;
+  margin-bottom: $spacing-sm;
+  padding: 4px 12px;
+  background: rgba($primary-orange, 0.15);
+  border-radius: $radius-full;
+}
+
+.section-title {
+  font-size: clamp($font-size-2xl, 3vw, $font-size-4xl);
+  color: $white;
+  margin: 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -1px;
+}
+
+// ============================================
+// TESTIMONIALS GRID (3 Spalten)
+// ============================================
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+}
+
+// ============================================
+// TESTIMONIAL CARD (Glassmorphism)
+// ============================================
+
+.testimonial-card {
+  position: relative;
+}
+
+.card-content {
+  height: 100%;
+  padding: $spacing-xl;
+  
+  // GLASSMORPHISM (jetzt sichtbar auf farbigem Hintergrund!)
+  background: rgba($white, 0.08);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  
+  border: 1px solid rgba($white, 0.15);
+  border-radius: $radius-lg;
+  box-shadow: 
+    0 8px 32px rgba($black, 0.4),
+    inset 0 1px 0 rgba($white, 0.2);
+  
+  transition: all $transition-slow;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-6px);
+    background: rgba($white, 0.12);
+    border-color: rgba($primary-orange, 0.4);
+    box-shadow: 
+      0 12px 40px rgba($primary-orange, 0.25),
+      inset 0 1px 0 rgba($white, 0.3);
+  }
+}
+
+// ============================================
+// RATING
+// ============================================
+
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: $spacing-md;
+
+  i {
+    color: $primary-orange;
+    font-size: $font-size-sm;
+  }
+}
+
+// ============================================
+// TEXT (Kürzer)
+// ============================================
+
+.testimonial-text {
+  font-size: $font-size-sm;
+  color: $gray-200;
+  line-height: $line-height-relaxed;
+  margin: 0 0 $spacing-lg 0;
+  font-weight: $font-weight-light;
+  font-style: italic;
+  flex: 1;
+}
+
+// ============================================
+// AUTHOR INFO (Kompakt)
+// ============================================
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid rgba($white, 0.1);
+}
+
+.author-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: $radius-circle;
+  background: linear-gradient(135deg, $primary-orange, darken($primary-orange, 10%));
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba($primary-orange, 0.3);
+}
+
+.author-details {
+  flex: 1;
+  min-width: 0;
+  
+  .author-name {
+    font-size: $font-size-base;
+    color: $white;
+    margin: 0 0 2px 0;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .author-company {
+    font-size: $font-size-xs;
+    color: rgba($primary-orange, 0.9);
+    margin: 0;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: $breakpoint-xl) {
+  .container {
+    padding: 0 $spacing-xl;
+  }
+
+  .testimonials-grid {
+    gap: $spacing-lg;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .card-content {
+    padding: $spacing-lg;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 0 $spacing-lg;
+  }
+
+  .testimonials-section {
+    padding: $spacing-2xl 0;
+    min-height: auto;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .card-content {
+    padding: $spacing-md;
+  }
+
+  .testimonial-text {
+    font-size: $font-size-xs;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-xs;
+  }
+}

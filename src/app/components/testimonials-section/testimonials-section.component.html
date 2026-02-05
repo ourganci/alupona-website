@@ -1,0 +1,39 @@
+<section class="testimonials-section">
+  <div class="container">
+    <!-- Kompakter Header -->
+    <div class="section-header">
+      <span class="eyebrow">Kundenstimmen</span>
+      <h2 class="section-title">Was unsere Kunden sagen</h2>
+    </div>
+
+    <!-- Testimonials Grid (3 Spalten statt Slider) -->
+    <div class="testimonials-grid">
+      @for (testimonial of testimonials.slice(0, 3); track testimonial.name; let i = $index) {
+        <article class="testimonial-card">
+          <div class="card-content">
+            <!-- Rating -->
+            <div class="rating">
+              @for (star of stars; track $index) {
+                <i class="bi bi-star-fill"></i>
+              }
+            </div>
+
+            <!-- Text -->
+            <p class="testimonial-text">"{{ testimonial.text }}"</p>
+
+            <!-- Author -->
+            <div class="author-info">
+              <div class="author-avatar">
+                {{ getInitials(testimonial.name) }}
+              </div>
+              <div class="author-details">
+                <h4 class="author-name">{{ testimonial.name }}</h4>
+                <p class="author-company">{{ testimonial.company }}</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

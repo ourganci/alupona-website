@@ -4,6 +4,8 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ProductShowcaseComponent } from './components/product-showcase/product-showcase.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import { FeaturesSectionComponent } from "./components/features-section/features-section.component";
+import { TestimonialsSectionComponent } from "./components/testimonials-section/testimonials-section.component";
+import { FooterComponent } from "./components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,9 @@ import { FeaturesSectionComponent } from "./components/features-section/features
     HeroComponent,
     ProductShowcaseComponent,
     LoadingScreenComponent,
-    FeaturesSectionComponent
+    FeaturesSectionComponent,
+    TestimonialsSectionComponent,
+    FooterComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

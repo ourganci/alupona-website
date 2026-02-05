@@ -1,0 +1,438 @@
+@use '../../../styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+.footer {
+  background: linear-gradient(180deg, $black-soft 0%, $gray-900 100%);
+  color: $white;
+  padding: $spacing-3xl * 2 $spacing-lg $spacing-3xl;
+  border-top: 1px solid rgba($primary-orange, 0.2);
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  // Subtiler Top-Glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $primary-orange,
+      transparent
+    );
+    opacity: 0.5;
+  }
+}
+
+// ============================================
+// FOOTER CONTENT
+// ============================================
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: $spacing-3xl;
+  margin-bottom: $spacing-3xl;
+}
+
+// ============================================
+// BRAND SECTION
+// ============================================
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  .brand-logo {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-extrabold;
+    color: $gray-100;
+    margin: 0;
+    letter-spacing: 0.5px;
+
+    .logo-o {
+      color: $primary-orange;
+    }
+
+    sup {
+      font-size: 0.5em;
+    }
+  }
+
+  .brand-tagline {
+    font-size: $font-size-lg;
+    color: $gray-400;
+    font-weight: $font-weight-light;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  .brand-description {
+    font-size: $font-size-base;
+    color: $gray-400;
+    line-height: $line-height-relaxed;
+    margin: $spacing-md 0 0 0;
+    max-width: 400px;
+  }
+}
+
+// ============================================
+// SOCIAL LINKS
+// ============================================
+
+.social-links {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-sm;
+
+  a {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-circle;
+    background: rgba($white, 0.04);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gray-300;
+    text-decoration: none;
+    font-size: $font-size-lg;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba($primary-orange, 0.15);
+      border-color: rgba($primary-orange, 0.4);
+      color: $primary-orange;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba($primary-orange, 0.2);
+    }
+  }
+}
+
+// ============================================
+// FOOTER SECTIONS
+// ============================================
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  h4 {
+    font-size: $font-size-lg;
+    color: $white;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-sm 0;
+    position: relative;
+    padding-bottom: $spacing-xs;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, $primary-orange, transparent);
+    }
+  }
+
+  a {
+    color: $gray-400;
+    text-decoration: none;
+    font-size: $font-size-base;
+    transition: all $transition-base;
+    position: relative;
+    align-self: flex-start;
+    padding: 2px 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: $primary-orange;
+      transition: width $transition-base;
+    }
+
+    &:hover {
+      color: $primary-orange;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// ============================================
+// NEWSLETTER SECTION (Glassmorphism)
+// ============================================
+
+.newsletter-section {
+  max-width: 1400px;
+  margin: 0 auto $spacing-3xl;
+}
+
+.newsletter-card {
+  padding: $spacing-2xl;
+  background: rgba($white, 0.04);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba($white, 0.1);
+  border-radius: $radius-lg;
+  box-shadow: 
+    0 4px 20px rgba($black, 0.3),
+    inset 0 1px 0 rgba($white, 0.06);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h3 {
+    font-size: $font-size-2xl;
+    color: $white;
+    margin: 0 0 $spacing-sm 0;
+    font-weight: $font-weight-bold;
+  }
+
+  p {
+    color: $gray-400;
+    margin: 0 0 $spacing-lg 0;
+    font-size: $font-size-base;
+  }
+}
+
+.newsletter-form {
+  display: flex;
+  gap: $spacing-sm;
+
+  input {
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+    background: rgba($white, 0.05);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: $radius-md;
+    color: $white;
+    font-size: $font-size-base;
+    transition: all $transition-base;
+
+    &::placeholder {
+      color: $gray-500;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba($primary-orange, 0.5);
+      background: rgba($white, 0.08);
+      box-shadow: 0 0 0 3px rgba($primary-orange, 0.1);
+    }
+  }
+
+  button {
+    padding: $spacing-md $spacing-xl;
+    background: $primary-orange;
+    border: none;
+    border-radius: $radius-md;
+    color: $white;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: all $transition-base;
+    white-space: nowrap;
+
+    &:hover {
+      background: darken($primary-orange, 5%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba($primary-orange, 0.3);
+
+      i {
+        transform: translateX(3px);
+      }
+    }
+
+    i {
+      transition: transform $transition-base;
+    }
+  }
+}
+
+// ============================================
+// FOOTER BOTTOM
+// ============================================
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: $spacing-xl;
+  border-top: 1px solid rgba($white, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-lg;
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $gray-500;
+
+    sup {
+      font-size: 0.7rem;
+    }
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: $spacing-lg;
+
+    a {
+      color: $gray-500;
+      text-decoration: none;
+      font-size: $font-size-sm;
+      transition: color $transition-base;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: $primary-orange;
+        transition: width $transition-base;
+      }
+
+      &:hover {
+        color: $primary-orange;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: $breakpoint-lg) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-2xl;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .footer {
+    padding: $spacing-2xl $spacing-md;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    text-align: center;
+  }
+
+  .footer-brand {
+    align-items: center;
+
+    .brand-description {
+      text-align: center;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+  }
+
+  .footer-section {
+    align-items: center;
+
+    h4::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    a {
+      align-self: center;
+    }
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+
+    button {
+      justify-content: center;
+    }
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: $spacing-md;
+
+    .footer-legal {
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .footer {
+    padding: $spacing-xl $spacing-sm;
+  }
+
+  .footer-brand {
+    .brand-logo {
+      font-size: $font-size-2xl;
+    }
+
+    .brand-tagline {
+      font-size: $font-size-base;
+    }
+  }
+
+  .social-links {
+    a {
+      width: 36px;
+      height: 36px;
+      font-size: $font-size-base;
+    }
+  }
+
+  .newsletter-card {
+    padding: $spacing-xl;
+
+    h3 {
+      font-size: $font-size-xl;
+    }
+
+    p {
+      font-size: $font-size-sm;
+    }
+  }
+}

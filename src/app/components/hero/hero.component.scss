@@ -18,7 +18,6 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
-  // Zusätzlicher Mesh-Gradient Effekt
   &::before {
     content: '';
     position: absolute;
@@ -46,12 +45,9 @@
 
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: url("../../../assets/images/hero-bg.jpg") center/cover no-repeat;
-  opacity: 0.15;
+  opacity: 0.25;
   z-index: $z-base;
 }
 
@@ -70,7 +66,6 @@
   line-height: $line-height-tight;
   font-weight: $font-weight-extrabold;
   letter-spacing: -2px;
-
   background: linear-gradient(135deg, $white 0%, $primary-orange 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -233,117 +228,78 @@
 }
 
 // ============================================
-// RESPONSIVE BREAKPOINTS
+// RESPONSIVE BREAKPOINTS (Linksbündig optimiert)
 // ============================================
-
-@media (max-width: $breakpoint-xl) {
-  .hero {
-    padding: 0 $spacing-3xl;
-    gap: $spacing-3xl;
-  }
-
-  .glow-circle {
-    width: 400px;
-    height: 400px;
-  }
-
-  .hero-visual {
-    height: 500px;
-  }
-}
 
 @media (max-width: $breakpoint-lg) {
   .hero {
+    height: auto;
+    min-height: 100dvh;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding: 120px $spacing-lg $spacing-lg;
-    gap: $spacing-3xl;
+    /* Bleibt linksbündig */
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* Viel Platz nach oben für den Header, links wie im Desktop */
+    padding: 160px 4rem $spacing-3xl;
+    gap: $spacing-2xl;
   }
 
   .hero-content {
-    max-width: 100%;
+    max-width: 495px;
+    margin-left: 0;
+  }
+
+  .hero-buttons {
+    justify-content: flex-start; // Buttons bleiben links
   }
 
   .hero-visual {
     height: 350px;
-    margin-top: $spacing-lg;
+    width: 100%;
+    justify-content: flex-start; // Visual ebenfalls links orientiert
+    margin-top: $spacing-xl;
   }
 
   .glow-circle {
-    width: 350px;
-    height: 350px;
-  }
-
-  .glow-circle-small {
-    width: 150px;
-    height: 150px;
-  }
-
-  .hero-buttons {
-    justify-content: center;
+    width: 300px;
+    height: 300px;
+    margin-left: -50px; // Optional: Schiebt den Glow leicht aus dem Bild für Style
   }
 }
 
 @media (max-width: $breakpoint-md) {
   .hero {
-    min-height: 600px;
-    padding: 100px $spacing-md $spacing-lg;
+    /* Padding an Standard-Mobile-Gutter anpassen, aber linksbündig bleiben */
+    padding: 140px $spacing-lg $spacing-2xl;
   }
 
-  .hero-visual {
-    height: 300px;
+  .hero-title {
+    letter-spacing: -1px;
   }
 
-  .glow-circle {
-    width: 280px;
-    height: 280px;
-  }
-
-  .glow-circle-small {
-    width: 120px;
-    height: 120px;
-  }
-
-  .btn {
-    padding: $spacing-sm $spacing-lg;
-    font-size: $font-size-base;
+  .hero-content {
+    max-width: 495px;
+    margin-left: 0;
   }
 }
 
 @media (max-width: $breakpoint-xs) {
   .hero {
-    min-height: 550px;
+    padding: 120px $spacing-md $spacing-xl;
   }
 
-  .hero-title {
-    font-size: $font-size-4xl;
-  }
+  .hero-buttons {
+    flex-direction: column; // Untereinander bei sehr schmalen Handys
+    width: 100%;
 
-  .hero-subtitle {
-    font-size: $font-size-base;
+    .btn {
+      width: 100%; // Buttons füllen Breite, Text darin bleibt meist center (Standard)
+      text-align: center;
+    }
   }
 
   .hero-visual {
     height: 250px;
-  }
-
-  .glow-circle {
-    width: 220px;
-    height: 220px;
-  }
-
-  .glow-circle-small {
-    display: none;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-
-    .btn {
-      width: 100%;
-      text-align: center;
-    }
   }
 }
