@@ -1,0 +1,307 @@
+@use "../../../styles.scss" as *;
+@use "sass:color";
+
+// ============================================
+// PRODUCT CATEGORIES SECTION
+// ============================================
+
+.section-product-categories {
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh; // Füllt ganzen Bildschirm
+  display: flex;
+  align-items: center;
+  padding: 0; // Kein oberes Padding, damit Farbe hinter Header durchscheint
+
+  // NEUER ORANGE-GRÜN VERLAUF (warm & modern)
+  background: linear-gradient(
+    135deg,
+    #1a1a2e 0%,          // Dunkelblau-Grau
+    #16213e 20%,         // Tiefblau
+    #0f3460 40%,         // Petrol-Blau
+    #1e4d5c 60%,         // Grün-Blau
+    #2d5a4a 80%,         // Dunkelgrün
+    #3a3a2e 100%         // Olivgrau
+  );
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(243, 146, 0, 0.12) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(46, 213, 115, 0.08) 0%, transparent 45%);
+    pointer-events: none;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 $spacing-2xl;
+  padding-top: 120px; // WICHTIG: Content nach unten verschieben (Header-Höhe + Abstand)
+  position: relative;
+  z-index: 1;
+}
+
+
+// ============================================
+// SECTION HEADER
+// ============================================
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $primary-orange;
+  margin-bottom: $spacing-sm;
+  padding: 4px 12px;
+  background: rgba($primary-orange, 0.15);
+  border-radius: $radius-full;
+}
+
+.section-title {
+  font-size: clamp($font-size-2xl, 3vw, $font-size-4xl);
+  color: $white;
+  margin: 0 0 $spacing-sm 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  font-size: $font-size-lg;
+  color: $gray-300;
+  margin: 0;
+  font-weight: $font-weight-light;
+}
+
+
+// ============================================
+// SLIDER WRAPPER
+// ============================================
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+
+// ============================================
+// SCROLLABLE CARDS CONTAINER
+// ============================================
+
+.cards-container {
+  display: flex;
+  gap: $spacing-lg;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: $spacing-md 0;
+  flex: 1;
+
+  // Versteckter Scrollbar für cleanen Look
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Snap-Scrolling für besseres UX
+  scroll-snap-type: x mandatory;
+}
+
+
+// ============================================
+// CATEGORY CARD (Glassmorphism)
+// ============================================
+
+.category-card {
+  min-width: 300px;
+  max-width: 300px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.glass-card {
+  background: rgba($white, 0.08);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba($white, 0.15);
+  border-radius: $radius-lg;
+  box-shadow: 0 8px 32px rgba($black, 0.4), inset 0 1px 0 rgba($white, 0.2);
+  transition: all $transition-slow;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px);
+    background: rgba($white, 0.12);
+    border-color: rgba($primary-orange, 0.4);
+    box-shadow: 0 12px 40px rgba($primary-orange, 0.25), inset 0 1px 0 rgba($white, 0.3);
+  }
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($primary-orange, 0.15);
+    z-index: 1;
+  }
+}
+
+.card-body {
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: $font-size-lg;
+  color: $primary-orange-light;
+  margin-bottom: $spacing-sm;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+.card-description {
+  font-size: $font-size-sm;
+  color: $gray-200;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-light;
+  flex-grow: 1;
+}
+
+.card-footer {
+  padding-top: $spacing-sm;
+  border-top: 1px solid rgba($white, 0.1);
+}
+
+.link-text {
+  font-size: $font-size-sm;
+  color: $primary-orange;
+  font-weight: $font-weight-semibold;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  transition: $transition-base;
+
+  i {
+    transition: transform $transition-base;
+  }
+
+  &:hover i {
+    transform: translateX(4px);
+  }
+}
+
+
+// ============================================
+// NAVIGATION BUTTONS
+// ============================================
+
+.nav-button {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-circle;
+  background: rgba($white, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($white, 0.2);
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all $transition-base;
+  font-size: $font-size-xl;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba($primary-orange, 0.3);
+    border-color: $primary-orange;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: $breakpoint-lg) {
+  .nav-button {
+    display: none;
+  }
+
+  .category-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+
+  .container {
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 100px $spacing-lg 0;
+  }
+
+  .category-card {
+    min-width: 260px;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .cards-container {
+    gap: $spacing-md;
+  }
+
+  .category-card {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .card-body {
+    padding: $spacing-md;
+  }
+
+  .container {
+    padding-top: 90px;
+  }
+}

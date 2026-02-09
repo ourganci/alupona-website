@@ -1,0 +1,49 @@
+<section class="section-product-highlights">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header text-center">
+      <span class="eyebrow">Produkthighlights</span>
+      <h2 class="section-title">LED‑Aluprofile für Architektur & Elektro</h2>
+    </div>
+
+    <!-- Grid: 3–4 Cards nebeneinander -->
+    <div class="testimonials-grid">
+      @for (showcase of showcases(); track showcase.image; let i = $index) {
+        <article class="testimonial-card">
+          <div class="card-content">
+            
+            <!-- IMAGE (ohne Padding, liegt direkt an) -->
+            <div
+              class="card-image"
+              [style.backgroundImage]="'url(' + showcase.image + ')'"
+              [alt]="showcase.title">
+            </div>
+
+            <!-- CARD BODY (Text-Bereich mit Padding) -->
+            <div class="card-body">
+              <h3 class="card-title">{{ showcase.title }}</h3>
+
+              <p class="card-text">{{ showcase.text }}</p>
+
+              <ul class="benefits">
+                @for (benefit of showcase.benefits; track $index) {
+                  <li>• {{ benefit }}</li>
+                }
+              </ul>
+
+              <!-- Button fixiert am unteren Rand -->
+              <div class="card-actions">
+                <a
+                  [routerLink]="showcase.link"
+                  class="btn btn-accent">
+                  Details anzeigen
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

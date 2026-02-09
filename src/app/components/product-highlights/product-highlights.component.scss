@@ -1,0 +1,274 @@
+@use "../../../styles.scss" as *;
+@use "sass:color";
+
+// ============================================
+// PRODUCT HIGHLIGHTS SECTION
+// ============================================
+
+.section-product-highlights {
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: $spacing-3xl 0;
+
+  // DEZENTER PINK-BLAU GRADIENT
+  background: linear-gradient(
+    135deg,
+    #1e1e2e 0%,
+    #2a2d3a 25%,
+    #2d3561 50%,
+    #3d2d52 75%,
+    #4a3f5c 100%
+  );
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 15% 25%, rgba(100, 100, 255, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255, 100, 200, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+  }
+}
+
+
+// ============================================
+// CONTAINER
+// ============================================
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 $spacing-2xl;
+  position: relative;
+  z-index: 1;
+}
+
+
+// ============================================
+// SECTION HEADER
+// ============================================
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+  
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $primary-orange;
+  margin-bottom: $spacing-sm;
+  padding: 4px 12px;
+  background: rgba($primary-orange, 0.15);
+  border-radius: $radius-full;
+}
+
+.section-title {
+  font-size: clamp($font-size-2xl, 3vw, $font-size-4xl);
+  color: $white;
+  margin: 0;
+  line-height: $line-height-tight;
+  font-weight: $font-weight-extrabold;
+  letter-spacing: -1px;
+}
+
+
+// ============================================
+// TESTIMONIALS GRID (3 Spalten)
+// ============================================
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+}
+
+
+// ============================================
+// TESTIMONIAL CARD (GLASSMORPHISM)
+// ============================================
+
+.testimonial-card {
+  position: relative;
+}
+
+.card-content {
+  height: 100%;
+  padding: 0; // KEIN Padding, damit Bild anliegt!
+
+  // GLASSMORPHISM
+  background: rgba($white, 0.08);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+
+  border: 1px solid rgba($white, 0.15);
+  border-radius: $radius-lg;
+  box-shadow: 
+    0 8px 32px rgba($black, 0.4),
+    inset 0 1px 0 rgba($white, 0.2);
+
+  transition: all $transition-slow;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px);
+    background: rgba($white, 0.12);
+    border-color: rgba($primary-orange, 0.4);
+    box-shadow: 
+      0 12px 40px rgba($primary-orange, 0.25),
+      inset 0 1px 0 rgba($white, 0.3);
+  }
+}
+
+
+// ============================================
+// CARD IMAGE (kein Padding!)
+// ============================================
+
+.card-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-radius: $radius-md $radius-md 0 0;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($primary-orange, 0.15);
+    z-index: 1;
+  }
+}
+
+
+// ============================================
+// CARD BODY (Text-Bereich mit Padding)
+// ============================================
+
+.card-body {
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: $font-size-lg;
+  color: $primary-orange-light;
+  margin-bottom: $spacing-sm;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+.card-text {
+  font-size: $font-size-sm;
+  color: $gray-200;
+  line-height: $line-height-relaxed;
+  margin: 0 0 $spacing-md 0;
+  font-weight: $font-weight-light;
+}
+
+.benefits {
+  font-size: $font-size-xs;
+  color: rgba($primary-orange, 0.9);
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: $spacing-lg;
+
+  li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+}
+
+.card-actions {
+  margin-top: auto;
+  text-align: center;
+  padding-top: $spacing-sm;
+}
+
+.btn-accent {
+  background: $primary-orange;
+  border: none;
+  color: $white;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-lg;
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 4px 15px rgba($primary-orange, 0.3);
+  transition: all $transition-base;
+  width: 100%;
+
+  &:hover {
+    background: $primary-orange-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($primary-orange, 0.4);
+  }
+}
+
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: $breakpoint-xl) {
+  .container {
+    padding: 0 $spacing-xl;
+  }
+
+  .testimonials-grid {
+    gap: $spacing-lg;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .card-body {
+    padding: $spacing-lg;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 0 $spacing-lg;
+  }
+
+  .section-product-highlights {
+    padding: $spacing-2xl 0;
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .card-body {
+    padding: $spacing-md;
+  }
+
+  .card-text {
+    font-size: $font-size-xs;
+  }
+}

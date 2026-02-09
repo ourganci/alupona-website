@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ProductShowcaseComponent } from './components/product-showcase/product-showcase.component';
+import { ProductHighlightsComponent } from './components/product-highlights/product-highlights.component';
+import { ProductCategoriesComponent } from "./components/product-categories/product-categories.component";
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import { FeaturesSectionComponent } from "./components/features-section/features-section.component";
 import { TestimonialsSectionComponent } from "./components/testimonials-section/testimonials-section.component";
@@ -14,6 +16,8 @@ import { FooterComponent } from "./components/footer/footer.component";
     HeaderComponent,
     HeroComponent,
     ProductShowcaseComponent,
+    ProductHighlightsComponent,
+    ProductCategoriesComponent,
     LoadingScreenComponent,
     FeaturesSectionComponent,
     TestimonialsSectionComponent,

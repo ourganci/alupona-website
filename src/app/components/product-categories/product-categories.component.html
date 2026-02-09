@@ -1,0 +1,66 @@
+<section class="section-product-categories">
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="section-header text-center">
+      <span class="eyebrow">Produkte</span>
+      <h2 class="section-title">Unsere Produktkategorien</h2>
+      <p class="section-subtitle">
+        Hochwertige LED-Aluprofile für jeden Einsatzbereich
+      </p>
+    </div>
+
+    <!-- Slider Container -->
+    <div class="slider-wrapper" 
+         (mouseenter)="onMouseEnter()" 
+         (mouseleave)="onMouseLeave()">
+      
+      <!-- Navigation Buttons -->
+      <button 
+        class="nav-button nav-button-left" 
+        (click)="scrollLeft()"
+        aria-label="Vorherige Kategorie">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <!-- Scrollable Cards -->
+      <div class="cards-container" #scrollContainer>
+        @for (category of categories(); track category.id) {
+          <article class="category-card glass-card">
+            <a [routerLink]="category.link" class="card-link">
+              
+              <!-- Image -->
+              <div 
+                class="card-image"
+                [style.backgroundImage]="'url(' + category.image + ')'">
+              </div>
+
+              <!-- Content -->
+              <div class="card-body">
+                <h3 class="card-title">{{ category.name }}</h3>
+                <p class="card-description">{{ category.description }}</p>
+                
+                <div class="card-footer">
+                  <span class="link-text">
+                    Mehr erfahren
+                    <i class="bi bi-arrow-right"></i>
+                  </span>
+                </div>
+              </div>
+
+            </a>
+          </article>
+        }
+      </div>
+
+      <!-- Right Navigation -->
+      <button 
+        class="nav-button nav-button-right" 
+        (click)="scrollRight()"
+        aria-label="Nächste Kategorie">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+
+    </div>
+  </div>
+</section>
